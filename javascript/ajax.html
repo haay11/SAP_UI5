@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <p>Hello World</p>
+    <script>
+        // var oXhr = new XMLHttpRequest();
+        // oXhr.open("GET", "../JSON/1.json");
+        // oXhr.onreadystatechange = function () {
+        //     if (oXhr.readyState === 4 && oXhr.status === 200) {
+        //         var sResponseText = oXhr.responseText;
+        //         var oResponseText = JSON.parse(sResponseText);
+        //         console.log(oResponseText)
+        //     }
+        // }
+        // oXhr.send();
+
+        // var oCar = {
+        //     name: "sonata",
+        //     price: 3000
+        // }
+
+        // var oCar2 = {
+        //     "name": "sonata",
+        //     "price": 3000
+        // }
+
+        // console.log(JSON.parse(JSON.stringify(oCar)));
+        // console.log(JSON.stringify(oCar2));
+
+        var oXhr = new XMLHttpRequest();
+        oXhr.open("GET", "https://services.odata.org/V4/(S(mbbmth4gont0gyzzkx3zx0sg))/TripPinServiceRW/People");
+        oXhr.onreadystatechange = function () {
+            if (oXhr.readyState === 4 && oXhr.status === 200) {
+                var sResponseText = oXhr.responseText;
+                var oResponseText = JSON.parse(sResponseText);
+
+                console.log(sResponseText)
+                console.log(oResponseText);
+                // document.write(sResponseText);
+
+                var sStringData = JSON.stringify(sResponseText);
+                var aData = oResponseText.value;
+
+
+                document.write("FIRST NAME ====================<br>")
+                for (var i = 0; i < aData.length; i++) {
+                    document.write(aData[i].FirstName + "<br>");
+                }
+
+                document.write("Emails ====================<br>")
+                for (var i = 0; i < aData.length; i++) {
+                    document.write(aData[i].Emails[0] + " / " + aData[i].Emails[1] + "<br>");
+                }
+                // for (var i = 0; i < oResponseText.length; i++) {
+                //     document.write(oResponseText[i].name + "<br> " +
+                //         oResponseText[i].price + "<br> " + oResponseText[i].maker);
+                // }
+
+            }
+        }
+        oXhr.send();
+    </script>
+</body>
+
+</html>
